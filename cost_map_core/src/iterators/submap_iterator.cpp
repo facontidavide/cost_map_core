@@ -6,7 +6,7 @@
 *****************************************************************************/
 
 #include <grid_map_core/GridMapMath.hpp>
-#include "../../../include/cost_map_core/iterators/submap_iterator.hpp"
+#include "cost_map_core/iterators/submap_iterator.hpp"
 
 
 using namespace std;

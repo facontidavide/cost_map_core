@@ -6,7 +6,7 @@
 *****************************************************************************/
 
 #include <iostream>
-#include "../../../include/cost_map_core/operators/inflation.hpp"
+#include "cost_map_core/operators/inflation.hpp"
 
 /*****************************************************************************
 ** Namespaces
