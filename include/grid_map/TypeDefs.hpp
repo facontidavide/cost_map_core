@@ -13,7 +13,7 @@
 
 namespace grid_map {
 
-  typedef Eigen::Matrix<unsigned char, Eigen::Dynamic, Eigen::Dynamic> Matrix;
+  typedef Eigen::Matrix<uint8_t, Eigen::Dynamic, Eigen::Dynamic> Matrix;
 
   //typedef Eigen::MatrixXf Matrix;
   typedef Matrix::Scalar DataType;
