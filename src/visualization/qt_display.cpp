@@ -4,15 +4,6 @@
 #include <QScreen>
 #include <QDebug>
 
-QImage GridMapToImage(const grid_map::Matrix &matrix )
-{
-    QImage image( matrix.cols(), matrix.rows(), QImage::Format_Mono );
-    grid_map::Matrix transposed = matrix.transpose();
-    memcpy( image.bits(), transposed.data(), matrix.size() );
-    return image;
-}
-
-
 ImageViewer::ImageViewer()
    : image_widget_(new NonAntiAliasImage(this) )
    , scaleFactor(1.0)
@@ -21,13 +12,15 @@ ImageViewer::ImageViewer()
     image_widget_->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     this->setBackgroundRole(QPalette::Dark);
     this->setWidget(image_widget_);
+    this->setAlignment( Qt::AlignCenter );
 }
 
 
 bool ImageViewer::load(const grid_map::Matrix &matrix )
 {
-    QImage newImage( QSize(matrix.rows(), matrix.cols()), QImage::Format_Grayscale8 );
-    memcpy( newImage.bits(), matrix.data(), matrix.size() );
+    grid_map::Matrix transposed = matrix.transpose();
+    QImage newImage( QSize(matrix.cols(), matrix.rows()), QImage::Format_Grayscale8 );
+    memcpy( newImage.bits(), transposed.data(), transposed.size() );
     setImage(newImage);
     return true;
 }
@@ -37,8 +30,9 @@ void ImageViewer::setImage(const QImage &newImage)
     image = newImage;
     image_widget_->setPixmap(QPixmap::fromImage(image));
     scaleFactor = 1.0;
-    scaleImage(1.0);
-    resize(image_widget_->size());
+    QSize size = image_widget_->pixmap().size();
+    resize( size * 2 );
+    image_widget_->resize( size );
 }
 
 
